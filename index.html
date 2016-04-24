@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>BunnyHopp</title>
+		<script type="text/javascript" src="jquery.js"></script>
+		<script src="objects.js" type="application/javascript"></script>
+		<script src="model.js" type="application/javascript"></script>
+		<script src="controller.js" type="application/javascript"></script>
+		<script src="view.js" type="application/javascript"></script>
+		<script src="main.js" type="application/javascript"></script>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<audio id="chew">
+			<source src="Sounds/chew.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="drink">
+			<source src="Sounds/drink.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="jump">
+			<source src="Sounds/jump.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="death">
+			<source src="Sounds/death.mp3" type="audio/mpeg">
+		</audio>
+		<button type="button" id="newGame">New Game</button>
+		<button type="button" id="continue" hidden="true">Continue</button>
+		<button type="button" id="replay" hidden="true">Retry</button>
+		<img id="ground" src="images/ground.svg" alt="" width="1" hidden="true">
+		<img id="bunny" src="images/spritesheet.png" alt="" width="900" hidden="true">
+		<img id="rock" src="images/rock.svg" alt="" width="200" hidden="true">
+		<img id="cloud" src="images/cloud.svg" alt="" width="250" hidden="true">
+		<img id="tree" src="images/background_tree.svg" height="500" hidden="true">
+		<img id="carrot" src="images/carrot.svg" width="80" hieght="40" hidden="true">
+		<img id="poison" src="images/poison.svg" width="90" height="60" hidden="true">
+		<canvas id="myCanvas" width="1200" height="800">Your browser doesn't support canvas element</canvas>
+	</body>
+</html>
