@@ -7,6 +7,9 @@ var playerImage;
 var groundImage;
 var rockImage;
 var cloudImage;
+var treeImage;
+var carrotImage;
+var poisonImage;
 var newGame;
 var retry;
 var cont;
@@ -16,29 +19,6 @@ var drinkA;
 var deathA;
 var player;
 
-
-
-
-
-
-
-
-
-
-/*viewSpace:
-**array of arrays - layers
-**layers:
-**arrays of objects
-**Type of objects:
-**item, obstacle, background
-*/
-
-var viewSpace = [
-	[],
-	[],
-	[],
-	[]
-];
 //delay bitween two obstacles
 var obstacleDelay = 60;
 //counting up to delay
@@ -75,7 +55,7 @@ var poison = false;
 var isPaused = false;
 //if game is started
 var isStarted = false;
-// used to cleer item Timer on death
+// used to clear item Timer on death
 var itemTimer;
 //requestAnimationFrame id
 var rafID;
@@ -85,8 +65,8 @@ var levelUp = function()
 {
 	if(score != 0 && !(score % (leveler)))
 	{
-		if(!poison && !carrot) speed += 2;
-		else speedTemp += 2;
+		if(!poison && !carrot) speed += 4;
+		else speedTemp += 4;
 		leveler += lAdder;
 		lAdder += 50;
 	}
@@ -97,15 +77,6 @@ var scoreCounter = function()
 {
 	scoreDelay++;
 	if(!(scoreDelay % 30)) score = scoreDelay / 30;
-}
-
-//funciton to print score
-var printScore = function(ctx)
-{
-	ctx.font = "30px Georgia";
-	if(poison) ctx.fillStyle = "white";
-	else ctx.fillStyle = "black";
-	ctx.fillText(score, 10, 30);
 }
 
 //function to pause game and show continue button
@@ -150,7 +121,8 @@ var generateItem = function()
 	var generate = Math.round(Math.random() * 100) % 100;
 	//var generate = 9;
 	console.log("generate: " + generate);
-	if(generate < 20) viewSpace[3].push(item(type, [1200, 520]));
+	var item = new Item()
+	if(generate < 20) viewSpace[items].push(item(type, [1200, 520]));
 }
 
 //function to generate obstacle when the time has come

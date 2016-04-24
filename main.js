@@ -1,9 +1,9 @@
 window.onload = function()
 {
 	//canvas
-	var canvas = document.getElementById("myCanvas");
+	canvas = document.getElementById("myCanvas");
 	//2d canvas context
-	var ctx = canvas.getContext("2d");
+	ctx = canvas.getContext("2d");
 	console.log(ctx);
 	//images and sound
 	var playerImage = document.getElementById("bunny");
@@ -21,6 +21,7 @@ window.onload = function()
 	var drinkA = document.getElementById("drink");
 	var deathA = document.getElementById("death");
 
+	var viewSpace = new ViewSpace();
 	var player = new Player(playerImage, 300, 201, 2, 0);
 
 	//print ground to canvas
@@ -33,6 +34,4 @@ window.onload = function()
 	//print 0 score to canvas
 	ctx.font="30px Georgia";
 	ctx.fillText(score, 10, 30);
-
-	//gameloop function
 }

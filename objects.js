@@ -1,3 +1,44 @@
+/*viewSpace:
+**array of arrays - layers
+**layers:
+**arrays of objects
+**Type of objects:
+**item, obstacle, background
+*/
+
+function ViewSpace()
+{
+	this.bg = [];
+	this.obstacles = [];
+	this.items = [];
+}
+
+ViewSpace.prototype.draw = function()
+{
+	if(!carrot && !poison) ctx.clearRect(0, 0, 1200, 600);
+	if(carrot)
+	{
+		ctx.beginPath();
+		ctx.fillStyle = "HotPink";
+		ctx.fillRect(0, 0, 1200, 600);
+		ctx.closePath();
+	}
+	if(poison)
+	{
+		ctx.beginPath()
+		ctx.fillStyle = "MidnightBlue";
+		ctx.fillRect(0, 0, 1200, 600)
+		ctx.closePath();
+	}
+	for(var i in this)
+	{
+		for(var j = 0; j < this[i].length; j++)
+		{
+			ctx.drawImage(this[i][j].src, this[i][j].position[0], this[i][j].position[1], this[i][j].widthToDisplay, this[i][j].heightToDisplay);
+		}
+	}
+}
+
 //player constructor
 function Player(src, width, height, numOfFrames, frameIndex)
 {
@@ -39,11 +80,10 @@ function Player(src, width, height, numOfFrames, frameIndex)
 			if(player.y >= 399) player.y = 399;
 		}
 	}
-
 }
 
 //function to return cloudObject
-var cloud = function(src, width, height, position)
+var Cloud = function(src, width, height, position)
 {
 	this.src = cloudImage;
 	this.type = "cloud";
@@ -53,7 +93,7 @@ var cloud = function(src, width, height, position)
 };
 
 //function to return itemObject
-var item = function(src, type, position)
+var Item = function(src, type, position)
 {
 	console.log(src);
 	this.src = src;
@@ -63,12 +103,17 @@ var item = function(src, type, position)
 	this.position = position;
 	this.activate = function()
 	{
-		if (layer[j].type == "carrot")
+		if (type === "carrot")
 		{
 			carrot = true;
 			speedTemp = speed;
 			chewA.currentTime = 0;
 			chewA.play();
+			if(player.y === 399 && carrot && speed === speedTemp)
+			{
+				speed -= 5;
+				itemTimer = setTimeout(function(){speed = speedTemp; carrot = false}, 5000);
+			}
 		}
 		else
 		{
@@ -76,12 +121,17 @@ var item = function(src, type, position)
 			speedTemp = speed;
 			drinkA.currentTime = 0;
 			drinkA.play();
+			if(player.y === 399 && poison && speed === speedTemp)
+			{
+				speed += 5;
+				itemTimer = setTimeout(function(){speed = speedTemp; poison = false}, 5000);
+			}
 		}
 	}
 };
 
 //function to return rockObject (obstacle)
-var rock = function(src, position)
+var Rock = function(src, position)
 {
 	this.type = "rock";
 	this.src = src;
@@ -94,7 +144,7 @@ var rock = function(src, position)
 };
 
 //function to return treeObject
-var tree = function(src, position)
+var Tree = function(src, position)
 {
 	this.src = src;
 	this.position = position;
