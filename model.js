@@ -185,34 +185,11 @@ var generateTree = function()
 }
 
 //function to check collisions and react
-var checkCollision = function()
+/*var checkCollision = function()
 {
-	var layer = viewSpace[2];
-	for(var j = 0; j < layer.length; j++)
-	{
-		if((layer[j].pseudoPosition[0] <= (player.widthToDisplay - 65) && (layer[j].pseudoPosition[0] + layer[j].pseudoWidth >= 50)) && (layer[j].pseudoPosition[1]) <= (player.y + player.heightToDisplay - 25))
-		{
-			deathA.currentTime = 0;
-			deathA.play();
-			window.cancelAnimationFrame(rafID);
-			retry.setAttribute("hidden", "false");
-			$("#replay").css("display", "block");
-		}
-	}
 
-	layer = viewSpace[3]
-	{
-		for(var j = 0; j < layer.length; j++)
-		{
-			if((layer[j].position[0] <= (player.widthToDisplay - 65) && (layer[j].position[0] + layer[j].widthToDisplay >= 50)) && (layer[j].position[1]) <= (player.y + player.heightToDisplay - 25))
-			{
-				layer[j].activate();
-				layer.splice(j, 1);
-			}
-		}
-	}
 }
-
+*/
 
 
 //function to initialize game settings at restart
