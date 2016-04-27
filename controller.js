@@ -2,7 +2,7 @@ var gameLoop = function()
 {
 	rafID = window.requestAnimationFrame(gameLoop);
 
-	checkCollision();
+	viewSpace.checkCollision();
 	generateObstacle();
 	generateCloud();
 	generateTree();
