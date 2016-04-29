@@ -21,6 +21,14 @@ function View = function()
 	}
 	this.drawButton = function(name)
 	{
-		$("#"+name).css()
+		var button = $("#"+name);
+		button.attr("hidden", "false");
+		button.css("display", "block");
+	}
+	this.hideButton = function(name)
+	{
+		var button = $("#"+name);
+		button.attr("hidde", "true");
+		button.css("display", "none");
 	}
 }
