@@ -1,13 +1,17 @@
 window.addEventListener("load", function()
 {
+	var model = new Model();
+	var view = new View();
+	var controller = new Controller();
+
 	canvas = document.getElementById("myCanvas");
-	console.log(ctx);
 	//images and sound
 	var playerImage = document.getElementById("bunny");
 	var groundImage = document.getElementById("ground");
 	var rockImage = document.getElementById("rock");
 	var cloudImage = document.getElementById("cloud");
 	var newGame = document.getElementById("newGame");
+	model.add()
 	newGame.onclick = newGameClick;
 	var retry = document.getElementById("replay");
 	retry.onclick = retryClick;
@@ -32,9 +36,6 @@ window.addEventListener("load", function()
 	ctx.font="30px Georgia";
 	ctx.fillText(score, 10, 30);
 
-	var model = new Model();
-	var view = new View();
-	var controller = new Controller();
 	window.addEventListener("keydown", keyDownHandle, true);
 	window.addEventListener("keyup", keyUpHandle, true);
 });
