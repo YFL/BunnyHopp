@@ -1,4 +1,4 @@
-function Model()
+ function Model()
 {
 	this.viewSpace;
 	this.player;
@@ -37,11 +37,11 @@ function Model()
 		this.viewSpace.items = [];
 		this.score = 0;
 		this.scoreDelay = 0;
-		this.jump = false;
+		this.player.jump = false;
 		this.direction = 1;
 		this.carrot = false;
 		this.poison = false;
-		if(this.itemTimer) clearTimeout(this.itemTimer);
+		clearTimeout(this.itemTimer);
 		this.speed = 10;
 	};
 
@@ -79,7 +79,7 @@ function Model()
 		else src = this.poisonImage;
 		var generate = Math.round(Math.random() * 100) % 100;
 		//var generate = 9;
-		/*if(generate < 20) */this.viewSpace.items.push(new Item(src, type, [1200, 520]));
+		if(generate < 20) this.viewSpace.items.push(new Item(src, type, [1200, 520]));
 	};
 
 	this.generateObstacle = function()
@@ -168,25 +168,27 @@ function Model()
 	{
 		if (this.carrot)
 		{
-			this.speedTemp = speed;
+			this.speedTemp = this.speed;
 			this.chewA.currentTime = 0;
 			this.chewA.play();
-			if(this.player.y === 399 && this.carrot && this.speed === this.speedTemp)
+			if(/*this.player.y === 399 && */this.carrot && this.speed === this.speedTemp)
 			{
 				this.speed -= 5;
-				this.itemTimer = setTimeout(function(){this.speed = this.speedTemp; this.carrot = false}, 5000);
 			}
+			var thiz = this;
+			this.itemTimer = setTimeout(function(){thiz.speed = thiz.speedTemp; thiz.speedTemp = 0; thiz.carrot = false}, 5000);
 		}
 		else if(this.poison)
 		{
 			this.speedTemp = this.speed;
 			this.drinkA.currentTime = 0;
 			this.drinkA.play();
-			if(this.player.y === 399 && this.poison && this.speed === this.speedTemp)
+			if(/*this.player.y === 399 && */this.poison && this.speed === this.speedTemp)
 			{
 				this.speed += 5;
-				this.itemTimer = setTimeout(function(){this.speed = this.speedTemp; this.poison = false}, 5000);
 			}
+			var thiz = this;
+			this.itemTimer = setTimeout(function(){thiz.speed = thiz.speedTemp; thiz.speedTemp = 0; thiz.poison = false}, 5000);
 		}
 	};
 
@@ -208,6 +210,8 @@ function Model()
 		{
 			if((layer[j].position[0] <= (this.player.widthToDisplay - 65) && (layer[j].position[0] + layer[j].widthToDisplay >= 50)) && (layer[j].position[1]) <= (this.player.y + this.player.heightToDisplay - 25))
 			{
+				if(layer[j].type === "carrot") this.carrot = true;
+				else this.poison = true;
 				this.activateItemEffect();
 				layer.splice(j, 1);
 			}

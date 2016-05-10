@@ -7,11 +7,11 @@ function View()
 	}
 	this.drawViewSpace = function(viewSpace, type)
 	{
-		if(type === undefined) this.ctx.clearRect(0, 0, 1200, 600);
+		/*if(type === undefined)*/ this.ctx.clearRect(0, 0, 1200, 600);
 		if(type === "carrot")
 		{
 			this.ctx.beginPath();
-			thisctx.fillStyle = "HotPink";
+			this.ctx.fillStyle = "HotPink";
 			this.ctx.fillRect(0, 0, 1200, 600);
 			this.ctx.closePath();
 		}

@@ -21,7 +21,7 @@ function Controller()
 		this.model.updateViewSpace();
 		if(!this.model.carrot && !this.model.poison) this.view.drawViewSpace(this.model.viewSpace);
 		else if(this.model.carrot) this.view.drawViewSpace(this.model.viewSpace, "carrot");
-		else if(this.model.poison) this.view.drawViewSpace(this.model.viewSpace, "posion");
+		else if(this.model.poison) this.view.drawViewSpace(this.model.viewSpace, "poison");
 		this.model.scoreCounter();
 		if(this.model.poison)this.view.printScore(this.model.score, "white");
 		else this.view.printScore(this.model.score, "black");
@@ -35,11 +35,10 @@ function Controller()
 	{
 		if(event.keyCode == 32)
 		{
-			if(!this.model.isPaused && this.model.isStarted)
+			if(!this.model.isPaused && this.model.isStarted && !this.model.gameOver)
 			{
 				this.model.player.jump = true;
 				this.model.jumpA.currentTime = 0;
-				console.log(pInfo.y);
 				if(this.model.player.y > 389) this.model.jumpA.play();
 			}
 			this.model.player.keyUp = false;
