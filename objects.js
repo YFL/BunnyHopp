@@ -13,32 +13,6 @@ function ViewSpace()
 	this.items = [];
 }
 
-ViewSpace.prototype.draw = function()
-{
-	if(!carrot && !poison) ctx.clearRect(0, 0, 1200, 600);
-	if(carrot)
-	{
-		ctx.beginPath();
-		ctx.fillStyle = "HotPink";
-		ctx.fillRect(0, 0, 1200, 600);
-		ctx.closePath();
-	}
-	if(poison)
-	{
-		ctx.beginPath()
-		ctx.fillStyle = "MidnightBlue";
-		ctx.fillRect(0, 0, 1200, 600)
-		ctx.closePath();
-	}
-	for(var i in this)
-	{
-		for(var j = 0; j < this[i].length; j++)
-		{
-			ctx.drawImage(this[i][j].src, this[i][j].position[0], this[i][j].position[1], this[i][j].widthToDisplay, this[i][j].heightToDisplay);
-		}
-	}
-}
-
 //player constructor
 function Player(src, width, height, numOfFrames, frameIndex)
 {
@@ -53,31 +27,36 @@ function Player(src, width, height, numOfFrames, frameIndex)
 	this.y = 399;
 	this.numOfFrames = numOfFrames;
 	this.frameIndex = frameIndex;
-	this.update = function()
+	this.jump = false;
+	this.direction = 1;
+	this.keyUp = true;
+	this.update = function(speed)
 	{
-		this.ticks += 1;
+		this.ticks++;
 		if(this.ticks >= 60 / speed)
 		{
-			this.frameIndex += 1;
+			this.frameIndex++;
 			this.ticks = 0;
 		}
 		if(this.frameIndex >= this.numOfFrames || this.y < 399) this.frameIndex = 0;
-		this.sXPos = this.frameIndex * this.width;
+		this.sXPos = this.frameIndex * this.widthToDisplay;
+
+		console.log(this);
 	};
 
-	this.jump = function()
+	this.jumping = function(speed)
 	{
-		if(jump)
+		if(this.jump)
 		{
-			if(player.y === 399) direction = 1;
-			if(player.y <= 159 || direction === 0 && keyUp){ direction = 0; jump = false; }
-			if(direction === 1 && player.y >= 159) player.y -= speed;
-			else player.y += speed;
+			if(this.y === 399) this.direction = 1;
+			if(this.y <= 159 || this.direction === 0 && this.keyUp){ this.direction = 0; this.jump = false; }
+			if(this.direction === 1 && this.y >= 159) this.y -= speed;
+			else this.y += speed;
 		}
 		else
 		{
-			if(direction === 0 && player.y < 399) player.y += speed;
-			if(player.y >= 399) player.y = 399;
+			if(this.direction === 0 && this.y < 399) this.y += speed;
+			if(this.y >= 399) this.y = 399;
 		}
 	}
 }
@@ -85,10 +64,10 @@ function Player(src, width, height, numOfFrames, frameIndex)
 //function to return cloudObject
 var Cloud = function(src, width, height, position)
 {
-	this.src = cloudImage;
+	this.src = src;
 	this.type = "cloud";
-	this.width = width;
-	this.height = height;
+	this.widthToDisplay = width;
+	this.heightToDisplay = height;
 	this.position = position;
 };
 
@@ -97,8 +76,8 @@ var Item = function(src, type, position)
 {
 	console.log(src);
 	this.src = src;
-	this.width = src.width;
-	this.height = src.height;
+	this.widthToDisplay = src.width;
+	this.heightToDisplay = src.height;
 	this.type = type;
 	this.position = position;
 	this.activate = function()
@@ -136,8 +115,8 @@ var Rock = function(src, position)
 	this.type = "rock";
 	this.src = src;
 	this.position = position;
-	this.width = 200;
-	this.height = 100;
+	this.widthToDisplay = 200;
+	this.heightToDisplay = 100;
 	this.pseudoPosition = [position[0] + 50, position[1] + 50];
 	this.pseudoHeight = 50;
 	this.pseudoWidth = 100;
@@ -149,6 +128,6 @@ var Tree = function(src, position)
 	this.src = src;
 	this.position = position;
 	this.type = tree;
-	this.height = 500;
-	this.width = src.width - 250;
+	this.heightToDisplay = 500;
+	this.widthToDisplay = src.width - 250;
 };
