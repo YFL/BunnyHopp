@@ -84,7 +84,7 @@
 
 	this.generateObstacle = function()
 	{
-		this.delayCounter++;
+		this.delayCounter += this.speed;
 		if(this.delayCounter >= 5 * this.obstacleDelay / 8 && this.delayCounter < 5* this.obstacleDelay / 8 + 1) this.generateItem();
 		if(this.delayCounter >= this.obstacleDelay)
 		{
@@ -93,17 +93,19 @@
 			{
 				if(layer[j].position[0] < 1200 && layer[j].position[0] > -layer[j].widthToDisplay) visibleObstacle++;
 			}
-			if(visibleObstacle < 5)
-			{
+			/*if(visibleObstacle < 5)
+			{*/
 				this.viewSpace.obstacles.push(new Rock(this.rockImage, [1200, 500]));
 				//console.log(viewSpace[1]);
 				this.delayCounter = 0;
-				var number1 = Math.round(Math.random() * 100) % 100;
-				if(number1 < 35) number1 = 35;
+				var number1 = Math.round(Math.random() * 1000) % 1000;
+				console.log(number1);
+				this.obstacleDelay = (this.player.widthToDisplay + this.rockImage.width + number1);
+				/*if(number1 < 35) number1 = 35;
 				var number = number1 + Math.round(Math.random() * 100) % 100;
-				this.obstacleDelay = number + Math.round(Math.random() * 10) % 10;
+				this.obstacleDelay = number + Math.round(Math.random() * 10) % 10;*/
 				visibleObstacle = 0;
-			}
+		//	}
 		}
 	};
 

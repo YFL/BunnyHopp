@@ -36,8 +36,6 @@ function View()
 	this.drawPlayer = function(player)
 	{
 		this.ctx.drawImage(player.src, player.sXPos, player.sYPos, player.widthToDisplay, player.heightToDisplay, player.x, player.y, player.widthToDisplay, player.heightToDisplay);
-		console.log(this.ctx);
-		console.log(player.src + " " + player.sXPos + " " + player.sYPos + " " + player.widthToDisplay + " " + player.heightToDisplay)
 	}
 	this.drawButton = function(name)
 	{
