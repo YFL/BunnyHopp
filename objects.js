@@ -40,8 +40,6 @@ function Player(src, width, height, numOfFrames, frameIndex)
 		}
 		if(this.frameIndex >= this.numOfFrames || this.y < 399) this.frameIndex = 0;
 		this.sXPos = this.frameIndex * this.widthToDisplay;
-
-		console.log(this);
 	};
 
 	this.jumping = function(speed)
