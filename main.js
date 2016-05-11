@@ -80,6 +80,7 @@ window.addEventListener("load", function()
 	//print player to canvas
 	ctx.drawImage(player.src, player.sXPos, player.sYPos, player.widthToDisplay, player.heightToDisplay, player.x, player.y, player.widthToDisplay, player.heightToDisplay);
 	//print 0 score to canvas
+	//haha
 	ctx.font="30px Georgia";
 	ctx.fillText(controller.model.score, 10, 30);
 
