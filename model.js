@@ -98,7 +98,8 @@
 				this.viewSpace.obstacles.push(new Rock(this.rockImage, [1200, 500]));
 				//console.log(viewSpace[1]);
 				this.delayCounter = 0;
-				var number1 = Math.round(Math.random() * 100) % 100;
+				var number1 = Math.round(Math.random() * 1000) % 1000;
+				console.log(number1);
 				this.obstacleDelay = (this.player.widthToDisplay + this.rockImage.width + number1);
 				/*if(number1 < 35) number1 = 35;
 				var number = number1 + Math.round(Math.random() * 100) % 100;
