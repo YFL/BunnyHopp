@@ -38,6 +38,7 @@ window.addEventListener("load", function()
 		controller.view.hideButton("continue")
 	}
 
+	var ctx = document.getElementById("myCanvas").getContext("2d");
 	controller.view.addCtx(document.getElementById("myCanvas"));
 	//images and sound
 	var playerImage = document.getElementById("bunny");
@@ -74,13 +75,13 @@ window.addEventListener("load", function()
 	//print ground to canvas
 	for(var i = 0; i < 1200; i += 40)
 		{
-			document.getElementById("myCanvas").getContext("2d").drawImage(groundImage, i, 600);
+			ctx.drawImage(groundImage, i, 600);
 		}
 	//print player to canvas
-	document.getElementById("myCanvas").getContext("2d").drawImage(player.src, player.sXPos, player.sYPos, player.widthToDisplay, player.heightToDisplay, player.x, player.y, player.widthToDisplay, player.heightToDisplay);
+	ctx.drawImage(player.src, player.sXPos, player.sYPos, player.widthToDisplay, player.heightToDisplay, player.x, player.y, player.widthToDisplay, player.heightToDisplay);
 	//print 0 score to canvas
-	document.getElementById("myCanvas").getContext("2d").font="30px Georgia";
-	document.getElementById("myCanvas").getContext("2d").fillText(controller.model.score, 10, 30);
+	ctx.font="30px Georgia";
+	ctx.fillText(controller.model.score, 10, 30);
 
 	window.addEventListener("keydown", startOnKeyDown, true);
 	window.addEventListener("keyup", startOnKeyUp, true);
